@@ -17,8 +17,16 @@
   </div>
   <div class="col-md-2">
     <span class="fa fa-search"></span>
-    <input id='searchUsers' [ngModel]='searchUserName' type="text" class="form-control" placeholder="User Name">
+    <input id='searchUsers' [ngModel]='searchUserName'
+    ngui-auto-complete
+        [source]="myNames"
+        [accept-user-input]="true"
+        [open-on-focus]="false"
+        [auto-select-first-item]="false"
+        [select-on-blur]="true"
+        (ngModelChange)="callBack($event)" type="text" class="form-control" placeholder="User Name">
   </div>
+
   <div class="col-md-1">
     <label for='viewmodule'>View/ Module</label>
   </div>
@@ -56,7 +64,14 @@
     <label for='searchCriteria'>Search Criteria</label></div>
   <div class="col-md-2">
     <span class="fa fa-search"></span>
-    <input id='searchCriteria' [ngModel]='searchCriteria' type="text" class="form-control custom-width" placeholder="Search Criteria">
+    <input id='searchCriteria' [ngModel]='searchCriteria' 
+       ngui-auto-complete
+        [source]="searchCriteriaList"
+        [accept-user-input]="true"
+        [open-on-focus]="false"
+        [auto-select-first-item]="false"
+        [select-on-blur]="true"
+        (ngModelChange)="callBack($event)" type="text" class="form-control custom-width" placeholder="Search Criteria">
   </div>
 
 
@@ -67,7 +82,14 @@
     <label for='searserverIpchCriteria'>Server/IP Details</label></div>
   <div class="col-md-3">
     <span class="fa fa-search icon"></span>
-    <input id='serverIp' [ngModel]='serverIp' type="text" class="form-control" placeholder="Server Ip">
+    <input id='serverIp' [ngModel]='serverIp'
+     ngui-auto-complete
+        [source]="serverIpList"
+        [accept-user-input]="true"
+        [open-on-focus]="false"
+        [auto-select-first-item]="false"
+        [select-on-blur]="true"
+        (ngModelChange)="callBack($event)" type="text" class="form-control" placeholder="Server Ip">
   </div>
   <div class="col-md-1">
     <label for='from'>From</label>
