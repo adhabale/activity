@@ -17,14 +17,9 @@
   </div>
   <div class="col-md-2">
     <span class="fa fa-search"></span>
-    <input id='searchUsers' [ngModel]='searchUserName'
-    ngui-auto-complete
-        [source]="myNames"
-        [accept-user-input]="true"
-        [open-on-focus]="false"
-        [auto-select-first-item]="false"
-        [select-on-blur]="true"
-        (ngModelChange)="callBack($event)" type="text" class="form-control" placeholder="User Name">
+    <input id='searchUsers' [ngModel]='searchUserName' ngui-auto-complete [source]="userNames" [accept-user-input]="true" [open-on-focus]="false"
+      [auto-select-first-item]="false" [select-on-blur]="true" (ngModelChange)="callBack($event)" type="text" class="form-control"
+      placeholder="User Name">
   </div>
 
   <div class="col-md-1">
@@ -61,17 +56,14 @@
   </select>
   </div>
   <div class="col-md-1">
-    <label for='searchCriteria'>Search Criteria</label></div>
+    <label for='searchCriteria'>Search Criteria<span style='color:red;'>*</span></label>
+   
+  </div>
   <div class="col-md-2">
     <span class="fa fa-search"></span>
-    <input id='searchCriteria' [ngModel]='searchCriteria' 
-       ngui-auto-complete
-        [source]="searchCriteriaList"
-        [accept-user-input]="true"
-        [open-on-focus]="false"
-        [auto-select-first-item]="false"
-        [select-on-blur]="true"
-        (ngModelChange)="callBack($event)" type="text" class="form-control custom-width" placeholder="Search Criteria">
+    <input id='searchCriteria' [ngModel]='searchCriteria' ngui-auto-complete [source]="searchCriteriaList" [accept-user-input]="true"
+      [open-on-focus]="false" [auto-select-first-item]="false" [select-on-blur]="true" (ngModelChange)="callBack($event)" type="text"
+      class="form-control custom-width" placeholder="Search Criteria">
   </div>
 
 
@@ -82,26 +74,25 @@
     <label for='searserverIpchCriteria'>Server/IP Details</label></div>
   <div class="col-md-3">
     <span class="fa fa-search icon"></span>
-    <input id='serverIp' [ngModel]='serverIp'
-     ngui-auto-complete
-        [source]="serverIpList"
-        [accept-user-input]="true"
-        [open-on-focus]="false"
-        [auto-select-first-item]="false"
-        [select-on-blur]="true"
-        (ngModelChange)="callBack($event)" type="text" class="form-control" placeholder="Server Ip">
+    <input id='serverIp' [ngModel]='serverIp' ngui-auto-complete [source]="serverIpList" [accept-user-input]="true" [open-on-focus]="false"
+      [auto-select-first-item]="false" [select-on-blur]="true" (ngModelChange)="callBack($event)" type="text" class="form-control"
+      placeholder="Server Ip">
   </div>
   <div class="col-md-1">
     <label for='from'>From</label>
   </div>
   <div class="col-md-3">
-    <datepicker></datepicker>
+    <datepicker datepickerId="fromDate" name="fromDate" isRequired='true' [selectedDate]="fromDate"  (dateChange)="setfromDate($event)" (dateFormatValidation)='checkfromDateFormat($event)'></datepicker>
+   
   </div>
   <div class="col-md-1">
     <label for='from'>To</label>
   </div>
   <div class="col-md-3">
-    <datepicker></datepicker>
+  <datepicker datepickerId="toDate" name="toDate" isRequired='true' [selectedDate]="toDate"  (dateChange)="settoDate($event)" (dateFormatValidation)='checktoDateFormat($event)'></datepicker>
+  <div *ngIf="checkDateValidation()" class="alert alert-danger">
+  From Date must be before to Date.
+     </div>  
   </div>
   <div class="col-md-12">
     <button class="btn btn-primary float-xs-right btn-mob-width margin-39" (click)="onSearch()">Search</button>
@@ -119,7 +110,9 @@
   </div>
   <div class="col-md-2">
     <span class="fa fa-search fa-mbl"></span>
-    <input id='searchUsers' [ngModel]='searchUserName' type="text" class="form-control" placeholder="User Name">
+    <input id='searchUsers' [ngModel]='searchUserName' ngui-auto-complete [source]="userNames" [accept-user-input]="true" [open-on-focus]="false"
+      [auto-select-first-item]="false" [select-on-blur]="true" (ngModelChange)="callBack($event)" type="text" class="form-control"
+      placeholder="User Name">
   </div>
   <div class="col-md-1">
     <label for='viewmodule'>View/ Module</label>
@@ -155,10 +148,14 @@
   </select>
   </div>
   <div class="col-md-1">
-    <label for='searchCriteria'>Search Criteria</label></div>
+    <label for='searchCriteria'>Search Criteria</label>
+ 
+  </div>
   <div class="col-md-2">
     <span class="fa fa-search fa-mbl"></span>
-    <input id='searchCriteria' [ngModel]='searchCriteria' type="text" class="form-control " placeholder="Search Criteria">
+    <input id='searchCriteria' [ngModel]='searchCriteria' ngui-auto-complete [source]="searchCriteriaList" [accept-user-input]="true"
+      [open-on-focus]="false" [auto-select-first-item]="false" [select-on-blur]="true" (ngModelChange)="callBack($event)" type="text"
+      class="form-control " placeholder="Search Criteria">
   </div>
 </div>
 
@@ -167,20 +164,26 @@
     <label for='searserverIpchCriteria'>Server/IP Details</label></div>
   <div class="col-md-3">
     <span class="fa fa-search fa-mbl"></span>
-    <input id='serverIp' [ngModel]='serverIp' type="text" class="form-control" placeholder="Server Ip">
+    <input id='serverIp' [ngModel]='serverIp' ngui-auto-complete [source]="serverIpList" [accept-user-input]="true" [open-on-focus]="false"
+      [auto-select-first-item]="false" [select-on-blur]="true" (ngModelChange)="callBack($event)" type="text" class="form-control"
+      placeholder="Server Ip">
   </div>
   <div class="col-md-1">
     <label for='from'>From</label>
   </div>
   <div class="col-md-3">
-    <datepicker></datepicker>
+   <datepicker datepickerId="fromDate" name="fromDate" isRequired='true' [selectedDate]="fromDate"  (dateChange)="setfromDate($event)" (dateFormatValidation)='checkfromDateFormat($event)'></datepicker>
+    
   </div>
   <div class="col-md-1">
     <label for='from'>To</label>
   </div>
   <div class="col-md-3">
-    <datepicker></datepicker>
-  </div>
+ <datepicker datepickerId="toDate" name="toDate" isRequired='true' [selectedDate]="toDate"  (dateChange)="settoDate($event)" (dateFormatValidation)='checktoDateFormat($event)'></datepicker>
+  <div *ngIf="checkDateValidation()" class="alert alert-danger">
+  From Date must be before to Date.
+     </div>  
+</div>
   <div class="col-md-12">
     <button class="btn btn-primary float-xs-right btn-mob-width" (click)="onSearch()">Search</button>
   </div>
@@ -250,4 +253,7 @@
       </table>
     </div>
   </div>
+</div>
+<div class="col-md-12" >
+ <pager [allItems]="activityLogs"></pager>  
 </div>

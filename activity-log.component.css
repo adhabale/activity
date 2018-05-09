@@ -168,13 +168,16 @@ hr {
     left: 169px;
     font-size: 16px;
     color: #009ed1;
+        z-index: 1;
+
 }
 .fa-mbl {
     position: absolute;
     top: 11px;
-    left: 282px;
+    left: 88%;
     font-size: 16px;
     color: #009ed1;
+    z-index: 1;
 }
 .margin-14{
     margin-right: 14px;
@@ -193,4 +196,6 @@ hr {
     left: 266px;
     font-size: 16px;
     color: #009ed1;
+        z-index: 1;
+
 }
